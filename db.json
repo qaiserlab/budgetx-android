@@ -1,0 +1,31 @@
+{
+  "monthly-overview": {
+    "type": "Income",
+    "total": 15000000
+  },
+  "transactions": {
+    "budget-control": [
+      { "id": 1, "category": { "id": 2, "categoryName": "Internet", "type": "Expense", "limit": 250000 }, "total": 250000, "progressPercentage": 100 },
+      { "id": 2, "category": { "id": 3, "categoryName": "Listrik", "type": "Expense", "limit": 500000 }, "total": 400000, "progressPercentage": 80 },
+      { "id": 3, "category": { "id": 4, "categoryName": "Air", "type": "Expense", "limit": 500000 }, "total": 75000, "progressPercentage": 100 },
+      { "id": 4, "category": { "id": 5, "categoryName": "Belanja/makan", "type": "Expense", "limit": 3000000 }, "total": 300000, "progressPercentage": 10 }
+    ],
+    "weekly": [
+      { "id": 1, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 10000000, "transactionDate": "2024-1-1" },
+      { "id": 2, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 50000, "transactionDate": "2024-1-4" },
+      { "id": 3, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 75000, "transactionDate": "2024-1-6" }
+    ],
+    "monthly": [
+      { "id": 1, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 10000000, "transactionDate": "2024-1-1" },
+      { "id": 2, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 50000, "transactionDate": "2024-1-4" },
+      { "id": 3, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 75000, "transactionDate": "2024-1-6" }
+    ]
+  },
+  "categories": [
+    { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 },
+    { "id": 2, "categoryName": "Internet", "type": "Expense", "limit": 250000 },
+    { "id": 3, "categoryName": "Listrik", "type": "Expense", "limit": 500000 },
+    { "id": 4, "categoryName": "Air", "type": "Expense", "limit": 500000 },
+    { "id": 5, "categoryName": "Belanja/makan", "type": "Expense", "limit": 3000000 }
+  ]
+}
