@@ -1,5 +1,8 @@
 package com.nusantech.budgetx.ui.home
 
+import android.app.AlertDialog
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +11,9 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.nusantech.budgetx.SplashActivity
 import com.nusantech.budgetx.databinding.FragmentHomeBinding
+import com.nusantech.budgetx.helpers.AuthManager
 
 class HomeFragment : Fragment() {
 
@@ -28,6 +33,7 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         lblHi = binding.lblHi
+
         btnLogout = binding.btnLogout
 
         btnLogout.setOnClickListener { logout() }
@@ -38,7 +44,30 @@ class HomeFragment : Fragment() {
     }
 
     fun logout() {
+        val alertDialogBuilder = AlertDialog.Builder(context)
 
+        alertDialogBuilder.setTitle("Konfirmasi")
+        alertDialogBuilder.setMessage("Apakah Anda ingin keluar dari sesi?")
+
+        alertDialogBuilder.setPositiveButton("OK") { dialog, which ->
+            val context: Context = requireContext()
+            val authManager = AuthManager(context)
+
+            authManager.logout()
+
+            val intent: Intent = Intent(context, SplashActivity::class.java)
+            startActivity(intent)
+
+            dialog.dismiss()
+            requireActivity().finish()
+        }
+
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        var alertDialog = alertDialogBuilder.create()
+        alertDialog.show()
     }
 
     override fun onDestroyView() {

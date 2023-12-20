@@ -23,7 +23,6 @@ class LoginActivity : AppCompatActivity() {
     lateinit var linkRegister: TextView
 
     lateinit var progressDialog: ProgressDialog
-    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,8 +41,6 @@ class LoginActivity : AppCompatActivity() {
         progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Loading...")
         progressDialog.setCancelable(false)
-
-        sharedPreferences = getSharedPreferences("budgetxdata", Context.MODE_PRIVATE)
     }
 
     fun btnLogin_onClick() {
@@ -53,10 +50,6 @@ class LoginActivity : AppCompatActivity() {
         authManager.login(
             txtUsername.text.toString(),
             txtPassword.text.toString(), { accessToken ->
-                val editor = sharedPreferences.edit()
-                editor.putString("accessToken", accessToken)
-                editor.apply()
-
                 progressDialog.dismiss()
 
                 val intent: Intent = Intent(this, MainActivity::class.java)

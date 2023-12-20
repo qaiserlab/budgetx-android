@@ -2,6 +2,7 @@ package com.nusantech.budgetx.helpers
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.util.Log
 import android.widget.Toast
 import com.android.volley.RequestQueue
@@ -22,6 +23,11 @@ class AuthManager(private val context: Context) {
     private val adminPassword = "P:5kQOypakBB3]0sPc,c"
     private var adminAccessToken: String = ""
 
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences(
+        "budgetxdata",
+        Context.MODE_PRIVATE
+    )
+
     private val requestQueue: RequestQueue by lazy {
         Volley.newRequestQueue(context.applicationContext)
     }
@@ -39,6 +45,10 @@ class AuthManager(private val context: Context) {
             Response.Listener { response ->
                 val jsonResponse = JSONObject(response)
                 val accessToken = jsonResponse.getString("access_token")
+
+                val editor = sharedPreferences.edit()
+                editor.putString("accessToken", accessToken)
+                editor.apply()
 
                 onSuccess.invoke(accessToken)
             },
@@ -61,6 +71,16 @@ class AuthManager(private val context: Context) {
         }
 
         requestQueue.add(request)
+    }
+
+    fun logout() {
+        val editor = sharedPreferences.edit()
+        editor.remove("accessToken")
+        editor.apply()
+    }
+
+    fun isLoggedIn(): Boolean {
+        return sharedPreferences.contains("accessToken")
     }
 
     fun register(
@@ -127,4 +147,5 @@ class AuthManager(private val context: Context) {
         }
 
     }
+
 }
