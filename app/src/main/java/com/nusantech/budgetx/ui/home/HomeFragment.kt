@@ -9,11 +9,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.nusantech.budgetx.SplashActivity
 import com.nusantech.budgetx.databinding.FragmentHomeBinding
+import com.nusantech.budgetx.helpers.ApiCall
 import com.nusantech.budgetx.helpers.AuthManager
+import java.text.NumberFormat
+import java.util.Locale
 
 class HomeFragment : Fragment() {
 
@@ -23,6 +27,8 @@ class HomeFragment : Fragment() {
     private lateinit var lblHi: TextView
     private lateinit var btnLogout: Button
     private lateinit var lblMonthlyOverview: TextView
+
+    lateinit var apiCall: ApiCall
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,7 +51,23 @@ class HomeFragment : Fragment() {
 
         lblMonthlyOverview = binding.lblMonthlyOverview
 
+        apiCall = ApiCall(requireContext())
+        apiCall.getMonthlyOverview({ type, total ->
+            val currencySymbol: String = if (type == "Income") "(+)" else "(-)"
+            val monthlyOverview = "$currencySymbol ${formatCurrency(total)}"
+
+            lblMonthlyOverview.setText(monthlyOverview)
+        }, {message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        })
+
         return root
+    }
+
+    fun formatCurrency(value: Int): String {
+        val currencyFormat = NumberFormat.getCurrencyInstance(Locale("id", "ID"))
+        val formattedValue = currencyFormat.format(value).replace("Rp", "").trim()
+        return formattedValue
     }
 
     fun logout() {
