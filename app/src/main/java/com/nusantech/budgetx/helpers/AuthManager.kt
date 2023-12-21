@@ -48,6 +48,7 @@ class AuthManager(private val context: Context) {
 
                 val editor = sharedPreferences.edit()
                 editor.putString("accessToken", accessToken)
+                editor.putString("username", username)
                 editor.apply()
 
                 onSuccess.invoke(accessToken)
@@ -146,6 +147,10 @@ class AuthManager(private val context: Context) {
             })
         }
 
+    }
+
+    fun getProfileName(): String? {
+        return sharedPreferences.getString("username", null)
     }
 
 }

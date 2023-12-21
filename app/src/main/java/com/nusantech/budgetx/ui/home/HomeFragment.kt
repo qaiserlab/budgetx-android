@@ -34,6 +34,11 @@ class HomeFragment : Fragment() {
 
         lblHi = binding.lblHi
 
+        val authManager = AuthManager(requireContext())
+        val profileName: String = authManager.getProfileName().orEmpty()
+
+        lblHi.setText("Hai, $profileName")
+
         btnLogout = binding.btnLogout
 
         btnLogout.setOnClickListener { logout() }
