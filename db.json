@@ -17,8 +17,8 @@
     ],
     "monthly": [
       { "id": 1, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 10000000, "transactionDate": "2024-1-1" },
-      { "id": 2, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 50000, "transactionDate": "2024-1-4" },
-      { "id": 3, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 75000, "transactionDate": "2024-1-6" }
+      { "id": 2, "category": { "id": 1, "categoryName": "Listrik", "type": "Expense", "limit": 500000 }, "total": 400000, "transactionDate": "2024-1-4" },
+      { "id": 3, "category": { "id": 1, "categoryName": "Air", "type": "Income", "limit": 150000 }, "total": 75000, "transactionDate": "2024-1-6" }
     ]
   },
   "categories": [
