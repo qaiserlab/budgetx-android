@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:background="@color/skyblue"
+    >
+    <LinearLayout
+        android:background="@drawable/toast_white_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        >
+        <ImageView
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@mipmap/uang"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="0.2"
+            />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="0.7">
+            <TextView
+                android:id="@+id/lblCategoryName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Food"
+                style="@style/SubTitleType" />
+            <TextView
+                android:id="@+id/lblTotal"
+                style="@style/SubTitleType"
+                android:textColor="@color/green"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rp. 10.000" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/lblTanggal"
+            android:textColor="@color/gray"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sabtu, 8 Juli 2020" />
+    </LinearLayout>
+</LinearLayout>
