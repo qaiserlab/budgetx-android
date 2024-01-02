@@ -13,6 +13,11 @@
         <item name="android:textSize">24dp</item>
         <item name="android:textColor">@color/darkblue</item>
     </style>
+    <style name="SubTitleType">
+        <item name="fontFamily">@font/raleway_bold</item>
+        <item name="android:textSize">20dp</item>
+        <item name="android:textColor">@color/darkblue</item>
+    </style>
     <style name="DescriptionType">
         <item name="fontFamily">@font/questrial_regular</item>
         <item name="android:textSize">16dp</item>

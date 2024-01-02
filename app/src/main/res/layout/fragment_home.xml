@@ -7,13 +7,13 @@
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="65dp"
         android:padding="24dp"
-        >
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="65dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,61 +22,85 @@
 
             <TextView
                 android:id="@+id/lblHi"
+                style="@style/TitleType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.8"
-                android:text="Hai, {Username}"
-                style="@style/TitleType"
-                />
+                android:text="Hai, {Username}" />
+
             <Button
-                android:backgroundTint="@color/white"
-                android:textColor="@color/darkblue"
-                android:padding="0dp"
                 android:id="@+id/btnLogout"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_weight="0.2"
+                android:backgroundTint="@color/white"
+                android:padding="0dp"
                 android:text="Logout"
                 android:textAlignment="textEnd"
-                />
+                android:textColor="@color/darkblue" />
         </LinearLayout>
 
         <TextView
-            style="@style/DescriptionType"
             android:id="@+id/textView8"
+            style="@style/DescriptionType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Control your expense, control your life" />
 
         <LinearLayout
+            style="@style/BlueBg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            style="@style/BlueBg"
             android:layout_marginTop="16dp"
-            >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textView9"
+                style="@style/DescriptionType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Monthly Overview"
-                style="@style/DescriptionType"
-                android:textColor="@color/white"
-                />
+                android:textColor="@color/white" />
+
             <TextView
                 android:id="@+id/lblMonthlyOverview"
+                style="@style/TitleType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="-10dp"
                 android:layout_weight="1"
                 android:text="Rp100.000"
-                style="@style/TitleType"
-                android:textColor="@color/white"
-                android:layout_marginTop="-10dp"
-                />
+                android:textColor="@color/white" />
         </LinearLayout>
 
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        tools:layout_editor_absoluteX="0dp"
+        >
+
+        <TextView
+            style="@style/SubTitleType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transaksi Bulanan"
+            android:paddingBottom="8dp"
+            />
+
+        <ListView
+            android:divider="@android:color/transparent"
+            android:dividerHeight="0dp"
+            android:id="@+id/lsvTransaction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
