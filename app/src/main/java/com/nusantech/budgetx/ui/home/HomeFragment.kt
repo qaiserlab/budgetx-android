@@ -1,6 +1,7 @@
 package com.nusantech.budgetx.ui.home
 
 import android.app.AlertDialog
+import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -12,6 +13,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.nusantech.budgetx.R
 import com.nusantech.budgetx.SplashActivity
 import com.nusantech.budgetx.databinding.FragmentHomeBinding
 import com.nusantech.budgetx.helpers.ApiCall
@@ -29,6 +31,7 @@ class HomeFragment : Fragment() {
     private lateinit var lblMonthlyOverview: TextView
 
     lateinit var apiCall: ApiCall
+    lateinit var progressDialog: ProgressDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +60,24 @@ class HomeFragment : Fragment() {
             val monthlyOverview = "$currencySymbol ${formatCurrency(total)}"
 
             lblMonthlyOverview.setText(monthlyOverview)
+        }, {message ->
+            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        })
+
+        // ListView
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading...")
+        progressDialog.setCancelable(false)
+
+        val lsvTransaction = binding.lsvTransaction
+
+        progressDialog.show()
+
+        apiCall.getTransactions({ items ->
+            val adapter = TransactionAdapter(requireContext(), R.layout.transaction_item, items)
+            lsvTransaction.adapter = adapter
+            progressDialog.dismiss()
         }, {message ->
             Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
         })
