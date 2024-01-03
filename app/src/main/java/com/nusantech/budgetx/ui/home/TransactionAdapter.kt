@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.nusantech.budgetx.R
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
 import java.util.Locale
 
 class TransactionAdapter(context: Context, resource: Int, objects: List<TransactionItem>):
@@ -29,7 +30,7 @@ class TransactionAdapter(context: Context, resource: Int, objects: List<Transact
             val total = "$currencySymbol ${formatCurrency(it.total)}"
 
             lblTotal.text = total
-            lblTanggal.text = it.tanggal
+            lblTanggal.text = formatTanggal(it.tanggal)
         }
         return itemView
     }
@@ -40,5 +41,11 @@ class TransactionAdapter(context: Context, resource: Int, objects: List<Transact
         return formattedValue
     }
 
+    fun formatTanggal(tanggal: String): String {
+        val inputFormat = SimpleDateFormat("yyyy-M-d", Locale.getDefault())
+        val date = inputFormat.parse(tanggal)
 
+        val outputFormat = SimpleDateFormat("EEEE, d MMMM yyyy", Locale("id"))
+        return outputFormat.format(date)
+    }
 }
