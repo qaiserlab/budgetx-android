@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.nusantech.budgetx.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:name="com.nusantech.budgetx.ui.transaksi.TransaksiFragment"
+        android:label="Transaksi"
+        tools:layout="@layout/fragment_transaksi" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.nusantech.budgetx.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/navigation_laporan"
+        android:name="com.nusantech.budgetx.ui.laporan.LaporanFragment"
+        android:label="Laporan"
+        tools:layout="@layout/fragment_laporan" />
 </navigation>
