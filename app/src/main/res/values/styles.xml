@@ -42,4 +42,10 @@
         <item name="android:background">@drawable/btnsec_bg</item>
         <item name="textAllCaps">false</item>
     </style>
+    <style name="ButtonCalc">
+        <item name="backgroundTint">@null</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">24dp</item>
+        <item name="fontFamily">@font/raleway_bold</item>
+    </style>
 </resources>
