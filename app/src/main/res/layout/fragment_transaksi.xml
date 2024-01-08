@@ -29,7 +29,7 @@
                 android:text="Pilih Kategori" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/btnBuat"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:background="@drawable/pill_button"
@@ -48,6 +48,7 @@
             android:orientation="horizontal">
 
             <Spinner
+                android:id="@+id/spnKategori"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:minHeight="60dp" />
@@ -61,7 +62,7 @@
             android:text="Masukan Jumlah" />
 
         <TextView
-            android:id="@+id/textView10"
+            android:id="@+id/txtJumlah"
             style="@style/TitleType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +70,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnTetapkanJumlah"
         android:layout_width="match_parent"
         android:backgroundTint="@color/lightgray"
         android:layout_height="64dp"
