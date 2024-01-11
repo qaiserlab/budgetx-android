@@ -1,12 +1,17 @@
 package com.nusantech.budgetx.ui.transaksi
 
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.RadioButton
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.nusantech.budgetx.R
 import com.nusantech.budgetx.databinding.FragmentTransaksiBinding
 import java.text.NumberFormat
 import java.util.Locale
@@ -35,6 +40,8 @@ class TransaksiFragment : Fragment() {
     lateinit var btnCalc9: Button
 
     lateinit var btnCalcBs: Button
+
+    lateinit var btnBuat: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -83,7 +90,52 @@ class TransaksiFragment : Fragment() {
         btnCalcBs = binding.btnCalcBs
         btnCalcBs.setOnClickListener { backSpaceJumlah() }
 
+        btnBuat = binding.btnBuat
+        btnBuat.setOnClickListener { buatKategori()  }
+
         return root
+    }
+
+    fun buatKategori() {
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(R.layout.dialog_buat_kategori)
+
+        val width = ViewGroup.LayoutParams.MATCH_PARENT
+        val height = ViewGroup.LayoutParams.WRAP_CONTENT
+
+        dialog.window?.setLayout(width, height)
+
+        val txtNamaKategori: EditText = dialog.findViewById(R.id.txtNamaKategori)
+        val radioIncome: RadioButton = dialog.findViewById(R.id.radioIncome)
+        val radioExpense: RadioButton = dialog.findViewById(R.id.radioExpense)
+        val txtLimit: EditText = dialog.findViewById(R.id.txtLimit)
+
+        val btnBuatKategori: Button = dialog.findViewById(R.id.btnBuatKategori)
+
+        btnBuatKategori.setOnClickListener {
+            if (txtNamaKategori.text.isEmpty()) {
+                Toast.makeText(
+                    requireContext(),
+                    "Nama Kategori belum diisi!",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
+            if (!radioIncome.isChecked && !radioExpense.isChecked) {
+                Toast.makeText(
+                    requireContext(),
+                    "Tipe income/expense harus dipilih salah satu!",
+                    Toast.LENGTH_LONG
+                ).show()
+                return@setOnClickListener
+            }
+
+            // save data
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     fun backSpaceJumlah() {
