@@ -18,7 +18,8 @@
     "monthly": [
       { "id": 1, "category": { "id": 1, "categoryName": "Gaji", "type": "Income", "limit": 10000000 }, "total": 10000000, "transactionDate": "2024-1-1" },
       { "id": 2, "category": { "id": 1, "categoryName": "Listrik", "type": "Expense", "limit": 500000 }, "total": 400000, "transactionDate": "2024-1-4" },
-      { "id": 3, "category": { "id": 1, "categoryName": "Air", "type": "Expense", "limit": 150000 }, "total": 75000, "transactionDate": "2024-1-6" }
+      { "id": 3, "category": { "id": 1, "categoryName": "Air", "type": "Expense", "limit": 150000 }, "total": 75000, "transactionDate": "2024-1-6" },
+      { "id": 3, "category": { "id": 1, "categoryName": "Belanja Dapur", "type": "Expense", "limit": 1500000 }, "total": 500000, "transactionDate": "2024-1-11" }
     ]
   },
   "categories": [
@@ -26,6 +27,7 @@
     { "id": 2, "categoryName": "Internet", "type": "Expense", "limit": 250000 },
     { "id": 3, "categoryName": "Listrik", "type": "Expense", "limit": 500000 },
     { "id": 4, "categoryName": "Air", "type": "Expense", "limit": 500000 },
-    { "id": 5, "categoryName": "Belanja/makan", "type": "Expense", "limit": 3000000 }
+    { "id": 5, "categoryName": "Belanja/makan", "type": "Expense", "limit": 3000000 },
+    { "id": 5, "categoryName": "Belanja Dapur", "type": "Expense", "limit": 1500000 }
   ]
 }

@@ -71,8 +71,8 @@
 
     <Button
         android:id="@+id/btnTetapkanJumlah"
+        style="@style/ButtonPrimary"
         android:layout_width="match_parent"
-        android:backgroundTint="@color/lightgray"
         android:layout_height="64dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"

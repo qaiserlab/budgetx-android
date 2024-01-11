@@ -1,19 +1,27 @@
 package com.nusantech.budgetx.ui.transaksi
 
 import android.app.Dialog
+import android.app.ProgressDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ProgressBar
 import android.widget.RadioButton
+import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.nusantech.budgetx.R
 import com.nusantech.budgetx.databinding.FragmentTransaksiBinding
+import com.nusantech.budgetx.helpers.ApiCall
 import java.text.NumberFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class TransaksiFragment : Fragment() {
@@ -24,8 +32,12 @@ class TransaksiFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    lateinit var apiCall: ApiCall
+    lateinit var progressDialog: ProgressDialog
+
     var jumlah: Int = 0
 
+    lateinit var spnKategori: Spinner
     lateinit var txtJumlah: TextView
     lateinit var btnCalc0: Button
     lateinit var btnCalc000: Button
@@ -42,6 +54,7 @@ class TransaksiFragment : Fragment() {
     lateinit var btnCalcBs: Button
 
     lateinit var btnBuat: Button
+    lateinit var btnTetapkanJumlah: Button
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,6 +63,14 @@ class TransaksiFragment : Fragment() {
     ): View {
         _binding = FragmentTransaksiBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        apiCall = ApiCall(requireContext())
+
+        progressDialog = ProgressDialog(requireContext())
+        progressDialog.setMessage("Loading...")
+        progressDialog.setCancelable(false)
+
+        spnKategori = binding.spnKategori
 
         txtJumlah = binding.txtJumlah
         txtJumlah.setText(formatCurrency(jumlah))
@@ -93,7 +114,45 @@ class TransaksiFragment : Fragment() {
         btnBuat = binding.btnBuat
         btnBuat.setOnClickListener { buatKategori()  }
 
+        btnTetapkanJumlah = binding.btnTetapkanJumlah
+        btnTetapkanJumlah.setOnClickListener { tetapkanJumlah() }
+
+        fetchKategori()
+
         return root
+    }
+
+    fun tetapkanJumlah() {
+        val categoryName = spnKategori.selectedItem.toString()
+
+        if (categoryName.isEmpty()) {
+            return Toast.makeText(
+                requireContext(),
+                "Kategori belum diisi",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        if (jumlah === 0) {
+            return Toast.makeText(
+                requireContext(),
+                "Jumlah belum ditentukan",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+
+        val today: LocalDate = LocalDate.now()
+        val tanggal: String = today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+
+        apiCall.createTransaction(
+            categoryName,
+            jumlah,
+            tanggal, {items ->
+                findNavController().navigate(R.id.navigation_home)
+            }, { message ->
+                Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+            }
+        )
     }
 
     fun buatKategori() {
@@ -131,11 +190,40 @@ class TransaksiFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            // save data
+            val categoryName: String = txtNamaKategori.text.toString()
+            val type: String = if (radioIncome.isChecked) "Income" else "Expense"
+            val limit: Int = if (txtLimit.text.isEmpty()) 0 else txtLimit.text.toString().toInt()
+
+            apiCall.createCategory(
+                categoryName,
+                type,
+                limit, {
+                    fetchKategori()
+                }, { message ->
+                    Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+                }
+            )
+
             dialog.dismiss()
         }
 
         dialog.show()
+    }
+
+    fun fetchKategori() {
+        progressDialog.show()
+
+        apiCall.getCategories({ items ->
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, items)
+
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+            spnKategori.adapter = adapter
+
+            progressDialog.dismiss()
+        }, { message ->
+            progressDialog.dismiss()
+            Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+        })
     }
 
     fun backSpaceJumlah() {
