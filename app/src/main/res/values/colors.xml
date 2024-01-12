@@ -13,4 +13,7 @@
     <color name="gray">#3C3D40</color>
     <color name="lightgray">#BDBDBD</color>
     <color name="green">#219653</color>
+    <color name="pink">#fce4ec</color>
+    <color name="lightgreen">#e0f2f1</color>
+    <color name="red">#EB5757</color>
 </resources>
