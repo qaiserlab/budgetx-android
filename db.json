@@ -29,5 +29,15 @@
     { "id": 4, "categoryName": "Air", "type": "Expense", "limit": 500000 },
     { "id": 5, "categoryName": "Belanja/makan", "type": "Expense", "limit": 3000000 },
     { "id": 5, "categoryName": "Belanja Dapur", "type": "Expense", "limit": 1500000 }
-  ]
+  ],
+  "reports": {
+    "expense": {
+      "total": 975000,
+      "percentage": 10
+    },
+    "income": {
+      "total": 10000000,
+      "percentage": 90
+    }
+  }
 }
