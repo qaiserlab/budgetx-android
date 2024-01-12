@@ -15,6 +15,41 @@ class ApiCall(_context: Context) {
     val baseUrl = "https://my-json-server.typicode.com/qaiserlab/budgetx-android"
     val context: Context = _context
 
+    fun getReport(
+        onSuccess: (expenseTotal: Int, expensePercentage: Int, incomeTotal: Int, incomePercentage: Int) -> Unit,
+        onError: (message: String) -> Unit
+    ) {
+        val url = "$baseUrl/reports"
+
+        val requestQueue = Volley.newRequestQueue(context)
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                try {
+                    val expense = response.getJSONObject("expense")
+                    val income = response.getJSONObject("income")
+
+                    val expenseTotal = expense.getInt("total")
+                    val expensePercentage = expense.getInt("percentage")
+
+                    val incomeTotal = income.getInt("total")
+                    val incomePercentage = income.getInt("percentage")
+
+                    onSuccess(expenseTotal, expensePercentage, incomeTotal, incomePercentage)
+                }
+                catch (e: JSONException) {
+                    onError("Gagal mendapatkan data")
+                }
+            },
+            { error ->
+                onError("Gagal mendapatkan data")
+            }
+        )
+
+        requestQueue.add(jsonObjectRequest)
+    }
+
     fun getMonthlyOverview(
         onSuccess: (type: String, total: Int) -> Unit,
         onError: (message: String) -> Unit
