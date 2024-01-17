@@ -1,0 +1,296 @@
+{
+	"info": {
+		"_postman_id": "18e98da2-2ff6-41b5-b2ed-6e7b706a05d4",
+		"name": "BudgetX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32389100"
+	},
+	"item": [
+		{
+			"name": "keycloak",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "be-sso-client",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "Ggv9XsZhsNeqp0niZHIHgcyyDWaZL5J8",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "budgetx",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "m30ng",
+									"type": "text"
+								},
+								{
+									"key": "scope",
+									"value": "openid",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://lemur-8.cloud-iam.com/auth/realms/dev-keycloak/protocol/openid-connect/token",
+							"protocol": "https",
+							"host": [
+								"lemur-8",
+								"cloud-iam",
+								"com"
+							],
+							"path": [
+								"auth",
+								"realms",
+								"dev-keycloak",
+								"protocol",
+								"openid-connect",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer $adminAccessToken",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"namauser\",\r\n    \"email\": \"namauser@email.com\",\r\n    \"enabled\": true,\r\n    \"emailVerified\": true,\r\n    \"credentials\": {\r\n        \"temporary\": false,\r\n        \"type\": \"password\",\r\n        \"value\": \"passwordnyadisini\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://lemur-8.cloud-iam.com/auth/admin/realms/dev-keycloak/users",
+							"protocol": "https",
+							"host": [
+								"lemur-8",
+								"cloud-iam",
+								"com"
+							],
+							"path": [
+								"auth",
+								"admin",
+								"realms",
+								"dev-keycloak",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "data",
+			"item": [
+				{
+					"name": "Monthly Overview",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/monthly-overview",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"monthly-overview"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transactions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/transactions",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoryName",
+									"value": "Belanja Dapur",
+									"type": "text"
+								},
+								{
+									"key": "total",
+									"value": "45000",
+									"type": "text"
+								},
+								{
+									"key": "tanggal",
+									"value": "2024-1-1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/transactions",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Categories",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/categories",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Category",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "categoryName",
+									"value": "Belanja Dapur",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "Expense",
+									"type": "text"
+								},
+								{
+									"key": "limit",
+									"value": "500000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/categories",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://my-json-server.typicode.com/qaiserlab/budgetx-android/reports",
+							"protocol": "https",
+							"host": [
+								"my-json-server",
+								"typicode",
+								"com"
+							],
+							"path": [
+								"qaiserlab",
+								"budgetx-android",
+								"reports"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
